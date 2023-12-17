@@ -1,25 +1,24 @@
-.navbar {
-    top: 0;  
+.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     font-size: 18px;
   }
   
-  .navbarLeft {
+  .footerLeft {
+    position: relative;
+  }
+  
+  .footerRight {
     position: relative;
 
   }
   
-  .navbarRight {
-    position: relative;
-    display: flex;
-    gap: 10px;
-    font-size: inherit;
-  }
-  
   @media only screen and (max-width: 600px) {
-    .navbar {
+    .footer {
       height: 30 px;
       min-height: 30px;
     }
