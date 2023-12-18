@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import styles from "./BackImage.module.css"; // Ensure the CSS module name matches
+import styles from "./backImage.module.css"; // Ensure the CSS module name matches
 import A01 from "../../../../public/01A.jpg";
 import B01 from "../../../../public/01B.jpg";
 
