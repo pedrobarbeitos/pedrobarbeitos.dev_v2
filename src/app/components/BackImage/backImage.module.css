@@ -1,0 +1,17 @@
+.imageContainer {
+    position: relative;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Adjust as needed */
+    height: auto; /* Adjust as needed */
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Smooth transition for the opacity */
+}
+
+.visible {
+    opacity: 1;
+}
