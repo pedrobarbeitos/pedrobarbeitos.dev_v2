@@ -1,15 +1,26 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import styles from "./BackImage.module.css"; // Make sure the CSS module name matches
+import styles from "./BackImage.module.css"; // Ensure the CSS module name matches
+import A01 from "../../../../public/01A.jpg";
+import B01 from "../../../../public/01B.jpg";
 
 const BackImage: React.FC = () => {
-  const [isLeftSide, setIsLeftSide] = useState<boolean>(true);
+  const [isTopLeftOrBottomRight, setIsTopLeftOrBottomRight] =
+    useState<boolean>(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const windowWidth = window.innerWidth;
-      const cursorPosition = e.clientX;
-      setIsLeftSide(cursorPosition < windowWidth / 2);
+      const windowHeight = window.innerHeight;
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+
+      setIsTopLeftOrBottomRight(
+        (cursorX < windowWidth / 2 && cursorY < windowHeight / 2) ||
+          (cursorX >= windowWidth / 2 && cursorY >= windowHeight / 2)
+      );
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -21,20 +32,24 @@ const BackImage: React.FC = () => {
 
   return (
     <div className={styles.imageContainer}>
-      <div className={`${styles.image} ${isLeftSide ? styles.visible : ""}`}>
-        <Image
-          src="/path/to/image1.jpg"
-          alt="Image 1"
-          layout="fill"
-          objectFit="cover" // Adjust as needed
-        />
+      <div
+        className={`${styles.imageBox} ${
+          isTopLeftOrBottomRight ? styles.visible : ""
+        }`}
+      >
+        <Image src={A01} width={700} height={700} alt="Image A01" priority />
       </div>
-      <div className={`${styles.image} ${!isLeftSide ? styles.visible : ""}`}>
+      <div
+        className={`${styles.imageBox} ${
+          !isTopLeftOrBottomRight ? styles.visible : ""
+        }`}
+      >
         <Image
-          src="/path/to/image2.jpg"
-          alt="Image 2"
-          layout="fill"
-          objectFit="cover" // Adjust as needed
+          src={B01}
+          width={700}
+          height={700}
+          alt="Image B01"
+          priority={true}
         />
       </div>
     </div>
