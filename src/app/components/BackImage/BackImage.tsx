@@ -23,8 +23,8 @@ const BackImage: React.FC = () => {
           (cursorX >= windowWidth / 2 && cursorY >= windowHeight / 2)
       );
 
-      const tiltX = ((cursorY - windowHeight / 2) / windowHeight) * 25;
-      const tiltY = (-(cursorX - windowWidth / 2) / windowWidth) * 25;
+      const tiltX = ((cursorY - windowHeight / 2) / windowHeight) * 20;
+      const tiltY = (-(cursorX - windowWidth / 2) / windowWidth) * 20;
 
       setTiltStyle({
         transform: `translate(-50%, -50%) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
