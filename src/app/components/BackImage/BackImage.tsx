@@ -2,13 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import styles from "./backImage.module.css"; // Ensure the CSS module name matches
+import styles from "./BackImage.module.css";
 import A01 from "../../../../public/01A.jpg";
 import B01 from "../../../../public/01B.jpg";
 
 const BackImage: React.FC = () => {
   const [isTopLeftOrBottomRight, setIsTopLeftOrBottomRight] =
     useState<boolean>(true);
+  const [tiltStyle, setTiltStyle] = useState({});
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -21,6 +22,13 @@ const BackImage: React.FC = () => {
         (cursorX < windowWidth / 2 && cursorY < windowHeight / 2) ||
           (cursorX >= windowWidth / 2 && cursorY >= windowHeight / 2)
       );
+
+      const tiltX = ((cursorY - windowHeight / 2) / windowHeight) * 25;
+      const tiltY = (-(cursorX - windowWidth / 2) / windowWidth) * 25;
+
+      setTiltStyle({
+        transform: `translate(-50%, -50%) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
+      });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -36,6 +44,7 @@ const BackImage: React.FC = () => {
         className={`${styles.imageBox} ${
           isTopLeftOrBottomRight ? styles.visible : ""
         }`}
+        style={tiltStyle}
       >
         <Image src={A01} width={700} height={700} alt="Image A01" priority />
       </div>
@@ -43,14 +52,9 @@ const BackImage: React.FC = () => {
         className={`${styles.imageBox} ${
           !isTopLeftOrBottomRight ? styles.visible : ""
         }`}
+        style={tiltStyle}
       >
-        <Image
-          src={B01}
-          width={700}
-          height={700}
-          alt="Image B01"
-          priority={true}
-        />
+        <Image src={B01} width={700} height={700} alt="Image B01" priority />
       </div>
     </div>
   );
