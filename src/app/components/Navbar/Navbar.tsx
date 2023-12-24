@@ -9,7 +9,7 @@ export const Navbar = () => {
         <Link href="/">pedro barbeitos</Link>
       </div>
       <div className={styles.navbarRight}>
-        <Link href="./">work</Link>
+        <Link href="./">projects</Link>
       </div>
     </div>
   );
