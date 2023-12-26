@@ -19,6 +19,7 @@ export default function MusicCollection() {
         );
         const data: DiscogResponse = await response.json();
         setRecords(data.releases);
+        console.log(data);
       } catch (error: any) {
         setError(error);
       } finally {
