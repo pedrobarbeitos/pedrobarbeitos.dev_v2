@@ -1,0 +1,26 @@
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(25%, auto));
+  width: 1100px;
+  max-width: 100%;
+}
+
+.imageContainer {
+    height: 300px;
+    width: 200px;
+    position: relative;
+  }
+  
+  .imageContainer img {
+    border-radius: 8px;
+  }
