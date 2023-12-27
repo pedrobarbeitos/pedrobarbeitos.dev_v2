@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import TmdbFilm from "../../models/TmdbFilm";
 import Image from "next/image";
 import styles from "./page.module.css";
+import FilterBar from "@/app/components/FilterBar/FilterBar";
 
 export default function FilmCollection() {
   const initialPlaceholderFilms = Array(50)
@@ -63,6 +64,7 @@ export default function FilmCollection() {
 
   return (
     <div>
+      <FilterBar />
       <main className={styles.main}>
         <div className={styles.grid}>
           {films.map((film, i) => (

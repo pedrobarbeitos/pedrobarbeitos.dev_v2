@@ -1,0 +1,22 @@
+.mainBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.barLeft{
+    display: flex;
+}
+
+.barRight{
+    display: flex;
+}
+
+.select{
+    display: flex;
+}
+
+.search{
+    display: flex;
+}
+
