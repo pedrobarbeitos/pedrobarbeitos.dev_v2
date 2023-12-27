@@ -2,12 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import TmdbFilm from "../../models/TmdbFilm";
-import TmdbResponse from "../../models/TmdbResponse";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function FilmCollection() {
-  const [films, setFilms] = useState<TmdbFilm[]>([]);
+  const initialPlaceholderFilms = Array(50)
+    .fill({})
+    .map((_, i) => ({
+      id: i,
+      title: "Loading...",
+      poster_path: "/placeholder.jpg",
+    }));
+  const [films, setFilms] = useState(initialPlaceholderFilms);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,12 +39,11 @@ export default function FilmCollection() {
         return data.items;
       } catch (error: any) {
         setError(error);
-        return [];
+        return;
       }
     };
 
     const fetchAllFilms = async () => {
-      setLoading(true);
       try {
         const [pageOne, pageTwo, pageThree] = await Promise.all([
           fetchFilms(1),
@@ -62,14 +67,18 @@ export default function FilmCollection() {
         <div className={styles.grid}>
           {films.map((film, i) => (
             <div key={i} className={styles.card}>
-              <h2>{film.title}</h2>
               <div className={styles.imageContainer}>
                 <Image
-                  src={"https://image.tmdb.org/t/p/w500" + film.poster_path}
+                  src={
+                    loading
+                      ? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUVFT6DwACNAFlD2DxwAAAAABJRU5ErkJggg=="
+                      : "https://image.tmdb.org/t/p/w500" + film.poster_path
+                  }
                   alt={film.title}
                   width={200}
                   height={300}
-                  priority
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mO8ff78fwAIgAN6RKyS3QAAAABJRU5ErkJggg=="
                 />
               </div>
             </div>
